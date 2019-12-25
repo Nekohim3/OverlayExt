@@ -76,6 +76,9 @@ namespace OverlayExt.UI
                 _min = value;
                 if (_min >= _max)
                     _max = _min + TickRate;
+                //if (AutoPpt)
+                    //CalcPpt();
+                //CheckParams();
             }
         }
         public float Max
@@ -86,6 +89,9 @@ namespace OverlayExt.UI
                 _max = value;
                 if (_max <= _min)
                     _min = _max - TickRate;
+                //if (AutoPpt)
+                    //CalcPpt();
+                //CheckParams();
             }
         }
         public float TickRate
@@ -96,9 +102,23 @@ namespace OverlayExt.UI
                 _tickRate = value;
                 if (_tickRate > _max - _min)
                     _tickRate = _max - _min;
+                //if (AutoPpt)
+                //CalcPpt();
+                //CheckParams();
             }
         }
-
+        //public int PixelPerTick
+        //{
+        //    get => _pixelPerTick;
+        //    set
+        //    {
+        //        if (AutoPpt)
+        //            CalcPpt();
+        //        else
+        //            _pixelPerTick = value;
+        //        CheckParams();
+        //    }
+        //}
         public ValueType Type { get; set; }
 
         public ControlRectangle SliderPos { get; set; }
@@ -188,11 +208,54 @@ namespace OverlayExt.UI
             var q = newValue / (Max - Min);
             Value = newValue + Min;
 
+            //var mouseTickPosition = (x - (Rect.X + SliderPos.Width / 2 + 3)) / ((Max - Min) / (Width - 12));
+            //if (Type == ValueType.Int)
+            //{
+            //    var newValue = (float) Math.Round(Math.Round(mouseTickPosition, 0) * TickRate + Min, 0);
             if (newValue >= Min && newValue <= Max && Math.Abs(newValue - Value) > 0.00001)
             {
                 Value = newValue + Min;
                 OnValueChanged(this);
             }
+
+            //}
+        }
+
+        //private void CheckParams()
+        //{
+        //    //if (_max - _min < _tickRate)
+        //    //{
+        //    //    //_tickRate = _max - _min;
+        //    //}
+
+        //    if (_value < _min)
+        //        _value = _min;
+        //    if (_value > _max)
+        //        _value = _max;
+
+        //    SliderPos.X = (int)(Rect.X + 3 + (Value - Min) * (PixelPerTick / TickRate));
+        //    SliderPos.Y = Rect.Y + 2;
+        //    SliderPos.Width = 5;
+        //    SliderPos.Height = Rect.Height - 4;
+
+        //}
+
+        private void CalcPpt()
+        {
+            //var barWidth = Width - 12;
+            ////if ((Max - Min) / TickRate > barWidth)
+            ////{
+            ////    if (Type == ValueType.Int)
+            ////    {
+            ////        //_tickRate = (float)Math.Ceiling((Max - Min) / barWidth);
+            ////    }
+            ////    else
+            ////    {
+            ////        //TODO: float
+            ////    }
+            ////}
+            //if (Type == ValueType.Int)
+            //    _pixelPerTick = (int)Math.Floor(barWidth / ((Max - Min) / TickRate));
         }
 
         private int GetFloatPrecision(float f)
