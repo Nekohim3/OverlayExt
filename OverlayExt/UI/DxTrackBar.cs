@@ -167,37 +167,5 @@ namespace OverlayExt.UI
             IsMouseOverSlider = res && x >= SliderPos.X && x <= SliderPos.X + SliderPos.Width && y >= SliderPos.Y && y <= SliderPos.Y + SliderPos.Height;
             return res;
         }
-
-        public override void OnMouseDown(DxControl ctl, MouseEventArgs e, Point pt)
-        {
-            base.OnMouseDown(ctl, e, pt);
-            if (IsMouseDown && IsMouseOver)
-                CalcNewValue(pt.X);
-        }
-
-        public override void OnMouseMove(DxControl ctl, MouseEventArgs e, Point pt)
-        {
-            if (IsMouseDown && IsMouseOver)
-                CalcNewValue(pt.X);
-        }
-
-        private void CalcNewValue(float x)
-        {
-            var mouseBarPosition = x - (Rect.X + SliderPos.Width / 2       + 3);
-            var newValue         = mouseBarPosition * (Max - Min) / (Width - 10);
-            var q = newValue / (Max - Min);
-            Value = newValue + Min;
-
-            if (newValue >= Min && newValue <= Max && Math.Abs(newValue - Value) > 0.00001)
-            {
-                Value = newValue + Min;
-                OnValueChanged(this);
-            }
-        }
-
-        private int GetFloatPrecision(float f)
-        {
-            return f.ToString().Split(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0])[3].Length;
-        }
     }
 }
