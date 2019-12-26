@@ -27,7 +27,6 @@ namespace WindowWrapperTester
         [STAThread]
         static void Main()
         {
-            float f = 123.123123123f;
             g.Overlay = new WindowWrapper(100, 100, 1280, 720)
             {
                 UseHook = true,
@@ -82,10 +81,11 @@ namespace WindowWrapperTester
             tb = new DxTrackBar("3", "DxTrackBar")
             {
                 Margin = new Thickness(200,500,0,0),
-                Min = 10,
-                Max = 100,
-                TickRate = 10,
-                Value = 10
+                Min = 0,
+                Max = 255,
+                TickRate = 1,
+                Value = 0,
+                IsSnapToTick = true
             };
             Controls.Add(tb);
             //l = new DxLabel("1", $"")
