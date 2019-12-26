@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Overlay.Drawing;
 using Overlay.Windows;
 using OverlayExt;
 using OverlayExt.UI;
@@ -57,7 +58,7 @@ namespace WindowWrapperTester
 
         #region overlay events
 
-        private static SharpDX.Direct2D1.Bitmap bmp;
+        private static Image bmp;
         private static int qq = 0;
         private static int ww = 0;
         private static DxLabel l;
@@ -93,6 +94,10 @@ namespace WindowWrapperTester
             //    Margin = new Thickness(10, 10, 0, 0), Width = 800, Height = 500
             //};
             //Controls.Add(l);
+
+            bmp = new Image(g.Graphics.GetRenderTarget(), "q.png");
+            var q = new DxImage("", bmp){Margin = new Thickness(10,10,0,0), Width = 200, Height = 200};
+            Controls.Add(q);
         }
 
         private static void Overlay_OnGraphicsDestroy(object sender, DestroyGraphicsEventArgs e)

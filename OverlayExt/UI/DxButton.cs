@@ -19,10 +19,10 @@ namespace OverlayExt.UI
 
         #endregion
 
-        public SolidBrush FontBrush { get; set; }
+        #region Brushes
+
         public NFont Font { get; set; }
-
-
+        public SolidBrush FontBrush { get; set; }
         public SolidBrush FillBrush { get; set; }
         public SolidBrush StrokeBrush { get; set; }
         public SolidBrush HoverFillBrush { get; set; }
@@ -30,11 +30,15 @@ namespace OverlayExt.UI
         public SolidBrush PressedFillBrush { get; set; }
         public SolidBrush PressedStrokeBrush { get; set; }
 
+        #endregion
+
+        #region Public Properties
+
         public string Text { get; set; }
-
-
         public TextAlignment TextAlign { get; set; }
         public ParagraphAlignment ParagraphAlign { get; set; }
+
+        #endregion
 
         public DxButton(string name, string text) : base(name)
         {
@@ -61,7 +65,6 @@ namespace OverlayExt.UI
 
         public override void Draw()
         {
-            //base.Draw();
             if (IsMouseOver)
             {
                 if (IsMouseDown)
@@ -77,9 +80,8 @@ namespace OverlayExt.UI
 
         public override void OnMouseDown(DxControl ctl, MouseEventArgs args, Point pt)
         {
+            //TODO: make normal click (down + up) and double click?
             OnClick(this);
-            //Click?.Invoke(this);
-            //MouseDown?.Invoke(ctl, args);
             base.OnMouseDown(ctl, args, pt);
         }
     }

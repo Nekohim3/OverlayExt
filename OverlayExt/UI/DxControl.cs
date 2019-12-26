@@ -68,9 +68,18 @@ namespace OverlayExt.UI
 
         #endregion
 
-        #region Properties
+        #region Private properties
 
         private Thickness _margin;
+        private int _width;
+        private int _height;
+        private HorizontalAlignment _horizontalAlignment;
+        private VerticalAlignment _verticalAlignment;
+
+        #endregion
+
+        #region Public properties
+
         public Thickness Margin
         {
             get => _margin;
@@ -81,7 +90,6 @@ namespace OverlayExt.UI
             }
         }
 
-        private int _width;
         public int Width
         {
             get => _width;
@@ -92,7 +100,6 @@ namespace OverlayExt.UI
             }
         }
 
-        private int _height;
         public int Height
         {
             get => _height;
@@ -103,7 +110,6 @@ namespace OverlayExt.UI
             }
         }
 
-        private HorizontalAlignment _horizontalAlignment;
         public HorizontalAlignment HorizontalAlignment
         {
             get => _horizontalAlignment;
@@ -114,7 +120,6 @@ namespace OverlayExt.UI
             }
         }
 
-        private VerticalAlignment _verticalAlignment;
         public VerticalAlignment VerticalAlignment
         {
             get => _verticalAlignment;
@@ -125,13 +130,13 @@ namespace OverlayExt.UI
             }
         }
 
-        #endregion
-
         public bool IsTransparent { get; set; }
         public bool IsMouseOver { get; set; }
         public bool IsMouseDown { get; set; }
-        
         public string Name { get; set; }
+
+        #endregion
+
 
 
         protected ControlRectangle Rect { get; set; }

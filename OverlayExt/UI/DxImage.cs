@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using Overlay.Drawing;
 using SharpDX.Direct2D1;
+using Image = Overlay.Drawing.Image;
 
 namespace OverlayExt.UI
 {
@@ -13,10 +14,10 @@ namespace OverlayExt.UI
         public SolidBrush PressedFillBrush { get; set; }
         public SolidBrush PressedStrokeBrush { get; set; }
 
-        public Bitmap Image { get; set; }
+        public Image Image { get; set; }
 
 
-        public DxImage(string name, Bitmap image) : base(name)
+        public DxImage(string name, Image image) : base(name)
         {
             Width = 100;
             Height = 100;
@@ -36,7 +37,6 @@ namespace OverlayExt.UI
 
         public override void Draw()
         {
-            //base.Draw();
             if (IsMouseOver)
             {
                 if (IsMouseDown)
@@ -48,19 +48,13 @@ namespace OverlayExt.UI
                 g.Graphics.OutlineFillRectangle(StrokeBrush, FillBrush, Rect.X, Rect.Y, Rect.Width, Rect.Height, 1, 0);
 
             var scale = 1f;
-            if (Rect.Width < Image.Size.Width)
-                scale = Rect.Width / Image.Size.Width;
-            if (Rect.Height < Image.Size.Height * scale)
-                scale = Rect.Height / Image.Size.Height;
+            if (Rect.Width < Image.Width)
+                scale = Rect.Width / Image.Width;
+            if (Rect.Height < Image.Height * scale)
+                scale = Rect.Height / Image.Height;
 
             if (Image != null)
-                g.Graphics.DrawImage(Image, Rect.X + (Rect.Width / 2) - (Image.Size.Width * scale / 2), Rect.Y + (Rect.Height / 2) - (Image.Size.Height * scale / 2), scale);
-        }
-
-        public override void OnMouseDown(DxControl ctl, MouseEventArgs args, Point pt)
-        {
-            //MouseDown?.Invoke(ctl, args);
-            base.OnMouseDown(ctl, args, pt);
+                g.Graphics.DrawImage(Image, Rect.X + (Rect.Width / 2) - (Image.Width * scale / 2), Rect.Y + (Rect.Height / 2) - (Image.Height * scale / 2), scale);
         }
     }
 }

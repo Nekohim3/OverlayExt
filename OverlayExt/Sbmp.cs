@@ -163,6 +163,7 @@ namespace OverlayExt
             var bitmapDecoder = new BitmapDecoder(imagingFactory, ms, DecodeOptions.CacheOnDemand);
             var frame = bitmapDecoder.GetFrame(0);
 
+
             var converter = new FormatConverter(imagingFactory);
             converter.Initialize(frame, SharpDX.WIC.PixelFormat.Format32bppPRGBA);
             var result = SharpDX.Direct2D1.Bitmap.FromWicBitmap(g.Graphics.GetRenderTarget(), converter);
